@@ -1,11 +1,41 @@
-🚀 E-Commerce Recommendation System (ALS-Based)This project is a high-performance recommendation engine built on a massive e-commerce dataset containing 1.5 Million users and 160,000+ products. It utilizes the Collaborative Filtering (ALS) algorithm to provide real-time, personalized product suggestions.By analyzing historical interactions (views, cart additions, purchases), the system predicts user preferences and delivers top-N recommendations in milliseconds.🏗️ ArchitectureThe project is designed with a modular, production-ready architecture:Data Pipeline: Efficient data loading and cleaning using Pandas, transforming raw data into a memory-efficient Compressed Sparse Row (CSR) matrix via Scipy.Model Engine: Training of an Alternating Least Squares (ALS) model using the Implicit library, optimized for implicit feedback datasets.API Layer: A high-speed FastAPI wrapper that serves the model, providing an asynchronous endpoint for real-time inference.DevOps: Fully Dockerized environment ensuring "run-anywhere" portability and consistency across development and production.🛠️ Tech StackComponentTechnologyReasoningLanguagePython 3.9The industry standard for ML and Data Science.AlgorithmALS (Implicit)Best-in-class performance for large-scale implicit feedback data.Data ProcessingPandas / ScipyOptimized handling of sparse interaction matrices to save RAM.Web FrameworkFastAPI / UvicornAsync support, high speed, and automatic Swagger documentation.ContainerizationDockerEliminates "it works on my machine" issues by isolating dependencies.🚀 Quick StartTo run this project locally, you only need Docker installed. No local Python environment setup is required.1. Build the ImageBashdocker build -t recommend-api .
-2. Run the ContainerBashdocker run -d -p 8000:8000 recommend-api
-3. Test the APIOpen your browser and navigate to the interactive documentation:http://localhost:8000/docs📊 Evaluation StrategyInstead of a traditional row-based train/test split, we used a Masking (Leave-p-out) strategy suitable for Collaborative Filtering:Training: 80% of user interactions were shown to the model.Validation: 20% of interactions were "masked" (hidden). The model's success was measured by its ability to recommend these hidden items to the users (Precision@K).📁 Project StructurePlaintextecommerce_recsys_project/
-├── api/                # FastAPI server implementation
-├── data/               # Raw and processed datasets (ignored by Git)
-├── models/             # Pre-trained .pkl model files
-├── src/                # Core logic: Data pipeline and Recommender class
-├── Dockerfile          # Docker build instructions
-├── .dockerignore       # Files excluded from the Docker build context
-└── requirements.txt    # Python library dependencies
-👨‍💻 Author: İlhan Berk Güven - Junior Machine Learning Engineer
+# 🚀 ShopSmart AI: High-Performance E-commerce Recommendation Engine
+
+ShopSmart AI is a production-ready, end-to-end recommendation system built to handle large-scale e-commerce data. It leverages **Collaborative Filtering** with the **ALS (Alternating Least Squares)** algorithm to provide personalized product suggestions from a dataset of over **42 million interactions**.
+
+## 🏗️ Architecture Overview
+The project is architected using a microservices-inspired approach, fully containerized with **Docker**:
+- **Machine Learning Engine:** Built with the `Implicit` library for scalable matrix factorization.
+- **Backend API:** High-performance inference layer developed with **FastAPI**.
+- **Frontend UI:** Interactive dashboard built with **Streamlit** for real-time simulations.
+- **Containerization:** Orchestrated via **Docker Compose** for seamless deployment.
+
+## 📊 Dataset Insights
+The model is trained on the **eCommerce Behavior Data from Multi Category Store** (Kaggle).
+- **Size:** 42M+ rows (October 2019).
+- **Events:** `view`, `cart`, and `purchase` interactions.
+- **Complexity:** Handled extreme data sparsity and high cardinality (thousands of products/categories).
+
+## ✨ Key Features
+- **Personalized Recommendations:** Latent factor analysis for registered users.
+- **Similar Product Discovery:** Item-to-item similarity using vector space distance.
+- **Real-Time Cold Start Solution:** Dynamic session-based recommendations for new users based on instant cart actions.
+- **Hybrid Catalog Generation:** Smart sampling of products across 50+ categories to prevent popularity bias.
+
+## 🛠️ Tech Stack
+- **Languages:** Python (Pandas, NumPy, Scipy)
+- **ML:** Implicit (ALS), Scikit-Learn
+- **API:** FastAPI, Uvicorn
+- **UI:** Streamlit
+- **DevOps:** Docker, Docker Compose
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Docker & Docker Compose installed on your machine.
+- Trained model files (`.pkl`) placed in the `/models` directory.
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/iberkguven/ecommerce-recsys.git](https://github.com/iberkguven/ecommerce-recsys.git)
+   cd ecommerce-recsys
