@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Backend API Serivce
+  api:
+    build: .
+    container_name: recommendation_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models  
+    environment:
+      - PYTHONPATH=/app
+    restart: always
+
+  # Frontend UI Service (Streamlit)
+  ui:
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+    container_name: recommendation_ui
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    environment:
+      - API_URL=http://api:8000
+    restart: always
